@@ -4,7 +4,7 @@ from subprocess import run
 from sys import argv
 from yaml import safe_load
 
-from yamlpack import resources
+from . import resources
 
 def load_data(resource_path: str) -> dict:
     """Load a yaml file from resources with given filepath"""
