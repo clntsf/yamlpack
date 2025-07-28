@@ -25,6 +25,9 @@ setuptools.setup(
         "Operating System :: MacOS",
     ],
     package_dir={"": "src"},
+    package_data={
+        "yamlpack": ["yamlpack/resources/*"]
+    },
     packages=setuptools.find_packages(where="src"),
     install_requires=[REQ_PKGS],
     python_requires=">=3.12.2",

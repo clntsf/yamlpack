@@ -1,0 +1,13 @@
+# package name and description for setup.py
+name: my-package
+description: my very first package!
+
+# here we list a filestructure-like module structure,
+# where an item is a string if it has no children
+# and an object if it has children. The toplevel is
+# always "modules"
+modules:
+  - module_one
+  - module_two:
+      - submodule_one
+  - module_three
