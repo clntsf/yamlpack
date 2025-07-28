@@ -33,7 +33,7 @@ def _build_modules(path: Path, modules: list):
 
 def main(package_yaml_fp: str, package_fp: str|Path):
     
-    settings = load_data("settings.yaml")
+    settings = load_data("settings.yml")
     package_cfg = load_data(package_yaml_fp)
 
     name = package_cfg["name"]
