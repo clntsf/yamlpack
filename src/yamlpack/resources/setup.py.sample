@@ -10,7 +10,7 @@ params = {
     "version": "0.0.1",
     "author": "@AUTHORNAME",
     "author_email": "@AUTHOREMAIL",
-    "description": "DESCRIPTION",
+    "description": "@DESCRIPTION",
 
     "long_description": long_description,
     "long_description_content_type": "text/markdown",

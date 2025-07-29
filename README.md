@@ -1,4 +1,4 @@
-# yaml-pkg
+# yamlpack
 Package boilerplate creator using YAML schemas
 
 ## Sample Schema:
