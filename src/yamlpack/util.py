@@ -1,8 +1,10 @@
 from importlib.resources import files
 from yaml import safe_load
 
+from yamlpack import resources
+
 def get_resource(resource_path: str):
-    return files("resources") / resource_path
+    return files(resources) / resource_path
 
 def get_text(resource_path: str):
     with get_resource(resource_path).open("r") as reader:

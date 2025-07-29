@@ -2,9 +2,10 @@ from importlib.resources import files, read_text
 from pathlib import Path
 from subprocess import run
 from sys import argv
+from yaml import safe_load
 
-from yamlpack.settings import get_settings, update_settings
-from yamlpack.util import get_text, load_yaml
+from yamlpack.settings import get_settings
+from yamlpack.util import get_text
 
 def _init_module(path: Path):
     """Make a module folder and __init__.py file (dummy module contents)"""
@@ -29,8 +30,8 @@ def _build_modules(path: Path, modules: list):
 def fill_fields(text: str, settings: dict):
     map = [
         ("@AUTHORNAME", settings["user"]["fullname"]),
-        ("@AUTHOREMAIL", settings["user"]["email_address"]),
-        ("@GITHUB", "https://github.com/" + settings["user"]["github_username"]),
+        ("@AUTHOREMAIL", settings["user"]["email"]),
+        ("@GITHUB", "https://github.com/" + settings["user"]["github"]),
         ("@PKGNAME", settings["package"]["name"]),
         ("@DESCRIPTION", settings["package"]["description"]),
     ]
@@ -61,8 +62,9 @@ def _populate_package_info_files(
 
 def main(package_yaml_fp: str, package_fp: str|Path):
     
-    settings = load_yaml("settings.yml")
-    package_cfg = load_yaml(package_yaml_fp)
+    settings = get_settings()
+    with open(package_yaml_fp, "r") as reader:
+        package_cfg = safe_load(reader)
 
     name = package_cfg["name"]
 
@@ -72,6 +74,7 @@ def main(package_yaml_fp: str, package_fp: str|Path):
     _populate_package_info_files(package_abspath, settings)
     srcpath = package_abspath.joinpath(f"src/{name}")
     run(["mkdir", f"{package_abspath}/src"])
+    run(["touch", srcpath, "__main__.py"])
     _init_module(srcpath)
 
     modules: list[str|dict] = package_cfg["modules"]
