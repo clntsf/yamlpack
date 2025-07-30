@@ -1,11 +1,6 @@
 from yaml import safe_dump
 
-from yamlpack.local.util import get_resource, load_yaml
-
-def get_settings() -> dict[str, str|dict]:
-    settings = load_yaml("settings.yml")
-    _ensure_complete(settings)              # fill null fields
-    return settings
+from yamlpack.local.util import get_local_resource, get_package_resource, load_yaml
 
 def _ensure_complete(settings: dict[str,str|dict], stub: str = ""):
     for key, value in settings.items():
@@ -22,7 +17,12 @@ def _ensure_complete(settings: dict[str,str|dict], stub: str = ""):
 
     return settings
 
+def get_settings() -> dict[str, str|dict]:
+    settings = load_yaml(get_local_resource("settings.yml"))
+    _ensure_complete(settings)              # fill null fields
+    return settings
+
 def update_settings(settings: dict[str, str|dict]):
-    file = str(get_resource("settings.yml"))
+    file = get_local_resource("settings.yml")
     with open(file, "w") as writer:
         safe_dump(settings, writer)

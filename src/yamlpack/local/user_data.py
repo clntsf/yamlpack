@@ -3,7 +3,7 @@ from platformdirs import user_data_dir
 import re
 from subprocess import run
 
-from yamlpack.local.util import get_resource
+from yamlpack.local.util import get_package_resource
 from yamlpack.local.builders import add_builder
 
 USER_DATA_DIR = Path(user_data_dir("yamlpack"))
@@ -14,7 +14,7 @@ def init_user_data():
 
     # populate config dir
     run(["mkdir", USER_DATA_DIR / "config"])
-    run(["cp", "-n", str(get_resource("settings.yml")), USER_DATA_DIR / "config" / "settings.yml"])
+    run(["cp", "-n", str(get_package_resource("settings.yml")), USER_DATA_DIR / "config" / "settings.yml"])
 
     # make builders dir and add default python builder
     run(["mkdir", USER_DATA_DIR / "builders"])
