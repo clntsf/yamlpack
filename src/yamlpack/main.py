@@ -1,4 +1,3 @@
-from importlib.resources import files, read_text
 from pathlib import Path
 from subprocess import run
 from sys import argv
@@ -72,13 +71,17 @@ def main(package_yaml_fp: str, package_fp: str|Path):
 
     settings["package"] = package_cfg
     _populate_package_info_files(package_abspath, settings)
+
     srcpath = package_abspath.joinpath(f"src/{name}")
     run(["mkdir", f"{package_abspath}/src"])
-    run(["touch", srcpath, "__main__.py"])
     _init_module(srcpath)
 
     modules: list[str|dict] = package_cfg["modules"]
     _build_modules(srcpath, modules)
+
+    boilerplate = ["README.md", ".gitignore", f"src/{name}/__main__.py"]
+    for filepath in boilerplate:
+        run(["touch", f"{package_abspath}/{filepath}"])
 
 if __name__ == "__main__":
     main(argv[1], ".")

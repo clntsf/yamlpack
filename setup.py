@@ -3,7 +3,8 @@ import setuptools
 with open("README.md", "r") as reader:
     long_description = reader.read()
 
-REQ_PKGS = []
+with open("requirements.txt") as reader:
+    REQ_PKGS = reader.read().splitlines()
 
 params = {
     "name": "yamlpack",
@@ -28,7 +29,7 @@ params = {
         "yamlpack": ["yamlpack/resources/*"]
     },
     "packages": setuptools.find_packages(where="src"),
-    "install_requires": [REQ_PKGS],
+    "install_requires": REQ_PKGS,
     "python_requires": ">=3.12.2",
 }
 
