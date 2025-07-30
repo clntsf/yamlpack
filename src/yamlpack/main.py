@@ -3,8 +3,8 @@ from subprocess import run
 from sys import argv
 from yaml import safe_load
 
-from yamlpack.settings import get_settings
-from yamlpack.util import get_text
+from yamlpack.local.settings import get_settings
+from yamlpack.local.util import get_text
 
 def _init_module(path: Path):
     """Make a module folder and __init__.py file (dummy module contents)"""

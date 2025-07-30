@@ -23,3 +23,15 @@ modules:
       - submodule_one
   - module_three
 ```
+
+## TODOs:
+
+- [ ] *(Compat)*: Ensure filesystem operations work cross-platform and migrate them if not.
+
+- [ ] *(CLI)*: Map out and implement a set of actions/subparsers
+
+- [ ] *(CLI)*: Implement CLI for main and alt flows
+
+- [ ] *(Builders)*: Decide on a builder protocol, populate the sample repo and link it
+
+- [ ] *(Config)*: Refactor config get and update functions to ensure write destination is in user data folder

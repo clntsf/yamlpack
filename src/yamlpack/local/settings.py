@@ -1,6 +1,6 @@
 from yaml import safe_dump
 
-from yamlpack.util import get_resource, load_yaml
+from yamlpack.local.util import get_resource, load_yaml
 
 def get_settings() -> dict[str, str|dict]:
     settings = load_yaml("settings.yml")
