@@ -8,7 +8,7 @@ def init_action(_: Namespace):
     exit_code = init_user_data()
 
 def add_builder_action(args: Namespace):
-    exit_code = add_builder(args.remote, args.name)
+    exit_code = add_builder(args.remote_link, args.builder_name)
 
 def make_action(args: Namespace):
     make_pack(args.package_path, args.schema_path)
