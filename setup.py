@@ -11,7 +11,7 @@ REQ_PKGS = [
 
 params = {
     "name": "yamlpack",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "author": "Colin Simon-Fellowes",
     "author_email": "colin.tsf@gmail.com",
     "description": "Package boilerplate creator using YAML schemas",
@@ -34,6 +34,11 @@ params = {
     "packages": setuptools.find_packages(where="src"),
     "install_requires": REQ_PKGS,
     "python_requires": ">=3.12.2",
+    "entry_points": {
+        'console_scripts': [
+            'yamlpack = yamlpack.__main__:main',
+        ],
+    }
 }
 
 setuptools.setup(
