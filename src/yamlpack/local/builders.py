@@ -59,13 +59,14 @@ def add_builder(builder_repo_link: str, name: str|None = None, quiet_fail: bool 
 
 
 def update_builder(builder_name: str):
-    try:
-        check_call(["cd", USER_DATA_DIR / "builders" / builder_name])
-    except CalledProcessError:
+
+    builder_dir = USER_DATA_DIR / "builders" / builder_name
+    if not builder_dir.exists():
         raise BuilderNotFoundException(f"Builder {builder_name} not found")
 
+    
     print(f"Updating builder: {builder_name}")
-    run(["git", "pull"])
+    run(["git", "pull"], cwd=builder_dir)
 
 
 def delete_builder(builder_name: str):

@@ -1,10 +1,9 @@
 from pathlib import Path
 from subprocess import run
-from sys import argv
 from yaml import safe_load
 
 from yamlpack.local.settings import get_settings
-from yamlpack.local.util import get_text
+from yamlpack.local.util import get_text, get_package_resource
 
 def _init_module(path: Path):
     """Make a module folder and __init__.py file (dummy module contents)"""
@@ -45,9 +44,9 @@ def _populate_package_info_files(
         settings: dict[str, str|dict],
     ):
 
-    pyproject_txt = get_text("pyproject.toml.sample")
-    license_txt = get_text("LICENSE.sample")
-    setup_txt = get_text("setup.py.sample")
+    pyproject_txt = get_text(get_package_resource("pyproject.toml.sample"))
+    license_txt = get_text(get_package_resource("LICENSE.sample"))
+    setup_txt = get_text(get_package_resource("setup.py.sample"))
 
     with open(package_path.joinpath("pyproject.toml"), "w") as writer:
         writer.write(fill_fields(pyproject_txt, settings))
@@ -59,15 +58,15 @@ def _populate_package_info_files(
         writer.write(fill_fields(setup_txt, settings))
 
 
-def main(package_yaml_fp: str, package_fp: str|Path):
+def make_pack(package_path: str, schema_path: str):
     
     settings = get_settings()
-    with open(package_yaml_fp, "r") as reader:
+    with open(schema_path, "r") as reader:
         package_cfg = safe_load(reader)
 
     name = package_cfg["name"]
 
-    package_abspath = Path(package_fp).resolve()
+    package_abspath = Path(package_path).resolve()
 
     settings["package"] = package_cfg
     _populate_package_info_files(package_abspath, settings)
@@ -82,6 +81,3 @@ def main(package_yaml_fp: str, package_fp: str|Path):
     boilerplate = ["README.md", ".gitignore", f"src/{name}/__main__.py"]
     for filepath in boilerplate:
         run(["touch", f"{package_abspath}/{filepath}"])
-
-if __name__ == "__main__":
-    main(argv[1], ".")

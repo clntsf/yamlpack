@@ -1,3 +1,6 @@
+[pyproject.scripts]
+yamlpack = "yamlpack.__main__:main"
+
 [build-system]
 requires = [
     "setuptools>=42",
