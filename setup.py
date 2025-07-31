@@ -1,10 +1,13 @@
 import setuptools
 
 with open("README.md", "r") as reader:
-    long_description = reader.read()
+    long_description = reader.read() \
+        .replace("- [", "[")                # normalize checkboxes for pypi format
 
-with open("requirements.txt") as reader:
-    REQ_PKGS = reader.read().splitlines()
+REQ_PKGS = [
+    "pyyaml>=6.0.0",
+    "platformdirs>=4.3.0"
+]
 
 params = {
     "name": "yamlpack",

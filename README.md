@@ -34,4 +34,8 @@ modules:
 
 - [ ] *(Builders)*: Decide on a builder protocol, populate the sample repo and link it
 
-- [ ] *(Config)*: Refactor config get and update functions to ensure write destination is in user data folder
+- [x] *(Config)*: Refactor config get and update functions to ensure write destination is in user data folder
+
+## Milestones:
+
+31 July 2025: 0.1.0 is the first version uploaded to [PyPI](https://pypi.org/project/yamlpack/) :partying_face:
