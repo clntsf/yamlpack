@@ -28,14 +28,16 @@ modules:
 
 - [ ] *(Compat)*: Ensure filesystem operations work cross-platform and migrate them if not.
 
-- [ ] *(CLI)*: Map out and implement a set of actions/subparsers
-
-- [ ] *(CLI)*: Implement CLI for main and alt flows
-
 - [ ] *(Builders)*: Decide on a builder protocol, populate the sample repo and link it
 
-- [x] *(Config)*: Refactor config get and update functions to ensure write destination is in user data folder
+- [X] *(Config)*: Refactor config get and update functions to ensure write destination is in user data folder
+
+- [X] *(CLI)*: Map out and implement a set of actions/subparsers
+
+- [X] *(CLI)*: Implement CLI for main and alt flows
 
 ## Milestones:
 
-31 July 2025: 0.1.0 is the first version uploaded to [PyPI](https://pypi.org/project/yamlpack/) :partying_face:
+- **1 Aug 2024**: 0.3.0 released: Fully working version with an initial set of commands and plugin support ([sample plugin](https://github.com/clntsf/builder-pypackage))
+
+- **31 July 2025**: 0.1.0 is the first version uploaded to [PyPI](https://pypi.org/project/yamlpack/) :partying_face:

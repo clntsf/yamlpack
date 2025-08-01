@@ -4,6 +4,7 @@ from platformdirs import user_data_dir
 import re
 from subprocess import run, check_call, CalledProcessError
 import sys
+from typing import cast
 
 from yamlpack.local.builder_cls import Builder
 
@@ -35,7 +36,7 @@ def load_builder(name: str) -> Builder:
     sys.modules["builder"] = module
     spec.loader.exec_module(module)
 
-    return module
+    return cast(Builder, module)
 
 def add_builder(builder_repo_link: str, name: str|None = None, quiet_fail: bool = False):
 
