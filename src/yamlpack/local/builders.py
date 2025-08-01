@@ -5,6 +5,8 @@ import re
 from subprocess import run, check_call, CalledProcessError
 import sys
 
+from yamlpack.local.builder_cls import Builder
+
 USER_DATA_DIR = Path(user_data_dir("yamlpack"))
 _BUILDER_NAME_RE = r"https:\/\/.*?\/(.+?).git"
 
@@ -17,12 +19,15 @@ class BuilderRemoteNotResolvedException(Exception):
     def __init__(self, remote: str):
         super().__init__(f"Remote {remote} could not be resolved")
 
-def load_builder(name: str):
-    init_path = USER_DATA_DIR / f"builders/{name}/__init__.py"
+def load_builder(name: str) -> Builder:
+    package_path = USER_DATA_DIR / f"builders/{name}"
+    init_path = package_path / "__init__.py"
     if not init_path.exists():
         raise BuilderNotFoundException(name)
     
-    spec = spec_from_file_location("builder", init_path)
+    spec = spec_from_file_location(
+        "builder", init_path, submodule_search_locations=[str(package_path)]
+    )
     if spec is None or spec.loader is None:
         raise ImportError(f"Could not load builder {name}")
     

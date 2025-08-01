@@ -11,7 +11,7 @@ REQ_PKGS = [
 
 params = {
     "name": "yamlpack",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "author": "Colin Simon-Fellowes",
     "author_email": "colin.tsf@gmail.com",
     "description": "Package boilerplate creator using YAML schemas",

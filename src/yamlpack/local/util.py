@@ -1,6 +1,9 @@
 from importlib.resources import files
+import os
 from pathlib import Path
 from platformdirs import user_data_dir
+from subprocess import run
+import sys
 from yaml import safe_load
 
 from yamlpack import resources
@@ -23,3 +26,11 @@ def get_text(path: Path):
 
 def load_yaml(path: Path) -> dict:
     return safe_load(get_text(path))
+
+def open_file(filepath: str|Path):
+    """Platform-agnostic file viewer, from https://stackoverflow.com/questions/17317219/"""
+    if sys.platform == "win32":
+        os.startfile(filepath)
+    else:
+        opener = "open" if sys.platform == "darwin" else "xdg-open"
+        run([opener, filepath])
