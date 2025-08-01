@@ -13,7 +13,7 @@ _BUILDER_NAME_RE = r"https:\/\/.*?\/(.+?).git"
 
 class BuilderNotFoundException(Exception):
     def __init__(self, name: str):
-        super().__init__(f"Builder {name} not foudn")
+        super().__init__(f"Builder {name} not found")
 
 class BuilderRemoteNotResolvedException(Exception):
     def __init__(self, remote: str):
@@ -67,7 +67,7 @@ def update_builder(builder_name: str):
 
     builder_dir = USER_DATA_DIR / "builders" / builder_name
     if not builder_dir.exists():
-        raise BuilderNotFoundException(f"Builder {builder_name} not found")
+        raise BuilderNotFoundException(builder_name)
 
     
     print(f"Updating builder: {builder_name}")
@@ -83,4 +83,4 @@ def delete_builder(builder_name: str):
         run(["rm", "-rf", builder_path])
 
     else:
-        raise BuilderNotFoundException(f"Builder {builder_name} not found")
+        raise BuilderNotFoundException(builder_name)

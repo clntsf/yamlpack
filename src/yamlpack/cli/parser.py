@@ -27,6 +27,32 @@ def make_add_builder_subparser(subparser_factory: _SubParsersAction) -> None:
 
     add_builder_parser.set_defaults(func=parser_actions.add_builder_action)
 
+def make_update_builder_subparser(subparser_factory: _SubParsersAction) -> None:
+    """Make subparser for the `yamlpack update-builder BUILDER_NAME` command"""
+
+    update_builder_parser: ArgumentParser = subparser_factory.add_parser(
+        "update-builder", help="update builder with given name"
+    )
+    update_builder_parser.add_argument(
+        "builder_name", type=str, metavar="builder-name",
+        help="name of the builder to update"
+    )
+
+    update_builder_parser.set_defaults(func=parser_actions.update_builder_action)
+
+def make_rm_builder_subparser(subparser_factory: _SubParsersAction) -> None:
+    """Make subparser for the `yamlpack rm-builder BUILDER_NAME` command"""
+
+    rm_builder_parser: ArgumentParser = subparser_factory.add_parser(
+        "rm-builder", help="delete builder with given name"
+    )
+    rm_builder_parser.add_argument(
+        "builder_name", type=str, metavar="builder-name",
+        help="name of the builder to delete"
+    )
+
+    rm_builder_parser.set_defaults(func=parser_actions.rm_builder_action)
+
 def make_make_subparser(subparser_factory: _SubParsersAction) -> None:
     """Make subparser for the `yamlpack make PACKAGE_PATH SCHEMA_PATH` command"""
 
@@ -53,8 +79,10 @@ def make_parser():
     subparsers = [
         make_init_subparser,
         make_add_builder_subparser,
+        make_update_builder_subparser,
+        make_rm_builder_subparser,
         make_make_subparser,
-        make_update_config_subparser
+        make_update_config_subparser,
     ]
 
     parser = ArgumentParser()
